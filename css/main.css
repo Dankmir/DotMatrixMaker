@@ -1,0 +1,24 @@
+body {
+    background-color: rgb(44, 40, 46);
+}
+
+.led-display {
+    background-color: rgb(34, 33, 33);
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+.led-display td {
+    width: 48px;
+    height: 48px;
+    background-color: #FFF;
+    border-radius: 50%;
+}
+
+.variable-name {
+    width: 409px;
+}
+
+.output {
+    width: 490px;
+}
