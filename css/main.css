@@ -19,6 +19,12 @@ body {
     width: 409px;
 }
 
-.output {
+.output-column {
     width: 490px;
+}
+
+.led-display td:hover {
+    background-color: rgb(255, 146, 146);
+    box-shadow: 0 0 8px rgb(255, 146, 146);
+    cursor: pointer;
 }

@@ -6,36 +6,27 @@ export class LedDisplay
     {
         this.display = table;
         this.leds = [];
-    
-        this.display.querySelectorAll("td").forEach(x => {
-            let led = new Led(x);
-            this.leds.push(led);
-        
-            x.onclick = () => led.Toggle();
-        });
+
+        this.display.querySelectorAll("td").forEach(x => this.leds.push(new Led(x)));
     }
 
-    // For setRow() function
-    getMatrix(variableName) 
+    getMatrixColumns(variableName) 
     {
-        let matrix = [[], [], [], [], [], [], [], []];
-
-        for (let i = 0; i < this.leds.length; ++i)
-            matrix[i % 8].push(this.leds[i].state);
-
         let elements = [];
 
         for (let i = 0; i < 8; ++i)
         {
             let el = "B";
             
-            for (let j = 0; j < 8; ++j)
-                el = el.concat(matrix[i][j].toString());
+            for (let j = 7; j >= 0; --j)
+                el = el.concat(this.leds[i*8 + j].state.toString());
             
             elements.push(el);
         }
 
-        let output = `byte ${variableName.length > 0 ? variableName : "matrix"}[8] = {${elements}};`;
+        const varName = variableName.length > 0 ? variableName : "matrix";
+        let output = `byte ${varName}[8] = {${elements}};`;
+        output = output.concat(`\n\nfor (int i = 0; i<8; ++i)\n{\n   lc.setColumn(0, i, ${varName}[i]);\n}`);
 
         return output;
     }

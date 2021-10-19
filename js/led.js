@@ -3,6 +3,7 @@ export class Led
     constructor(cell)
     {
         this.cell = cell;
+        this.cell.onclick = () => this.Toggle();
         this.state = 0;
     }
 
